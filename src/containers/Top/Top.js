@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   position: fixed;
+  flex-basis: 20%;
   left: 0;
   top: 0;
   width: 100%;

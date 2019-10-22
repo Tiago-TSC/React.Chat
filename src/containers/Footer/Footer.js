@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { enabled } from 'ansi-colors';
 
 const FooterDiv = styled.div`
   position: fixed;
+  display: flex;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -22,15 +22,11 @@ const UserDiv = styled.div`
 `;
 
 const MessageDiv = styled.div`
+  display: flex;
+  flex-direction: row;
   float: left;
   margin: 0;
   width: 70%;
-`;
-
-const SendDiv = styled.div`
-  float: left;
-  margin: 0;
-  width: 10%;
 `;
 
 const Input = styled.input`
@@ -46,6 +42,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
+  flex-basis: auto;
   font-family: inherit;
   border: none;
   margin: 7px;
@@ -76,6 +73,7 @@ const Button = styled.button`
 `;
 
 const TextArea = styled.textarea`
+  flex: 1;
   outline: none;
   font-family: inherit;
   box-sizing: border-box;
@@ -141,10 +139,8 @@ const Footer = props => {
         <TextArea value={textAreaValue} onChange={textAreaChangedHandler} disabled={!messageEnable}>
           {props.message}
         </TextArea>
-      </MessageDiv>
-      <SendDiv>
         <Button disabled={!messageEnable}>Enviar</Button>
-      </SendDiv>
+      </MessageDiv>
     </FooterDiv>
   );
 };
