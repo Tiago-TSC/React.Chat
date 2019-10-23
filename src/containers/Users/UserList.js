@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { ListDiv, UserGroup, UserItem } from './styles';
 
 const UserList = props => {
+  const { onlineUsers } = props;
+
+  const userItems = onlineUsers.map(userName => {
+    return <UserItem>{userName}</UserItem>;
+  });
+
   return (
     <ListDiv>
       <div>
@@ -9,14 +16,15 @@ const UserList = props => {
           <strong>Usuários online</strong>
         </center>
       </div>
-      <UserGroup>
-        <UserItem>Usuário 1</UserItem>
-        <UserItem>Usuário 2</UserItem>
-        <UserItem>Usuário 3</UserItem>
-        <UserItem>Usuário 4</UserItem>
-      </UserGroup>
+      <UserGroup>{userItems}</UserGroup>
     </ListDiv>
   );
 };
 
-export default UserList;
+const mapStateToProps = state => {
+  return {
+    onlineUsers: state.users.onlineUsers,
+  };
+};
+
+export default connect(mapStateToProps)(UserList);

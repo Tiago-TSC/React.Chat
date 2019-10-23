@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FooterDiv, UserDiv, Input, Button, MessageDiv, TextArea } from './styles'
+import { connect } from 'react-redux';
+import { FooterDiv, UserDiv, Input, Button, MessageDiv, TextArea } from './styles';
+import * as actions from '../../store/actions';
 
 const Footer = props => {
-  const [userName, setUserName] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [inputEnable, setInputEnable] = useState(true);
   const [userButtonText, setUserButtonText] = useState('Confirmar');
@@ -19,19 +20,18 @@ const Footer = props => {
       return;
     }
 
-    setUserName(inputValue);
-
     if (userButtonText === 'Confirmar') {
       setInputEnable(false);
       setMessageEnable(true);
       setUserButtonText('Cancelar');
+      props.onAddUser(inputValue);
     } else {
       setInputEnable(true);
       setMessageEnable(false);
-      setUserName('');
       setInputValue('');
       setTextAreaValue('');
       setUserButtonText('Confirmar');
+      props.onRemoveUser(inputValue);
     }
   };
 
@@ -60,4 +60,20 @@ const Footer = props => {
   );
 };
 
-export default Footer;
+const mapStateToProps = state => {
+  return {
+    onlineUsers: state.users.onlineUsers,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddUser: userName => dispatch(actions.addUser(userName)),
+    onRemoveUser: userName => dispatch(actions.removeUser(userName)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Footer);
