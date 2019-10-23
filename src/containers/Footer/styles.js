@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const FooterDiv = styled.div`
   display: flex;
+  flex-direction: row;
   background-color: #ef9a9a;
   color: #fff;
   text-align: left;
@@ -14,13 +15,13 @@ export const FooterDiv = styled.div`
 export const UserDiv = styled.div`
   float: left;
   margin: 0;
-  width: 20%;
+  width: 270px;
 `;
 
 export const MessageDiv = styled.div`
   display: flex;
   flex-direction: row;
-  float: left;
+  flex: 1;
   margin: 0;
   width: 70%;
 `;

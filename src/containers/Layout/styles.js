@@ -9,9 +9,8 @@ export const Page = styled.div`
 `;
 
 export const Content = styled.div`
-  box-sizing: border-box;
-  flex: 1;
-  background-color: #fff;
   display: flex;
   flex-direction: row;
+  flex: 1;
+  background-color: #fff;
 `;

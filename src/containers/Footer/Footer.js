@@ -15,7 +15,7 @@ const Footer = props => {
 
   const userNameHandler = () => {
     if (inputValue === '') {
-      alert('Digite no nome do usuário.');
+      alert('Digite o nome do usuário.');
       return;
     }
 
