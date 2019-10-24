@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { FooterDiv, UserDiv, Input, Button, MessageDiv, TextArea } from './styles';
-import UserService from "../../services/userService";
+import { FooterDiv, UserDiv, Input, MessageDiv, TextArea } from './styles';
+import UserService from "../../../../services/UserService";
+import Button from "../../../../components/Button";
 
 const Footer = props => {
   const dispatch = useDispatch();

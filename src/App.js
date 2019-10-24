@@ -1,10 +1,10 @@
 import React from 'react';
-import Layout from './containers/Layout/Layout';
+import Chat from './pages/Chat';
 
 import './App.css';
 
 function App() {
-  return <Layout />;
+  return <Chat />;
 }
 
 export default App;
