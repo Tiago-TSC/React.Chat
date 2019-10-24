@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from "react-redux";
 import { ListDiv, UserGroup, UserItem } from './styles';
 
 const UserList = props => {
-  const { onlineUsers } = props;
+  const onlineUsers = useSelector(({users}) => users.onlineUsers)
 
   const userItems = onlineUsers.map(userName => {
     return <UserItem>{userName}</UserItem>;
@@ -21,10 +21,4 @@ const UserList = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    onlineUsers: state.users.onlineUsers,
-  };
-};
-
-export default connect(mapStateToProps)(UserList);
+export default UserList;

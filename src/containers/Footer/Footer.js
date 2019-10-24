@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { FooterDiv, UserDiv, Input, Button, MessageDiv, TextArea } from './styles';
-import * as actions from '../../store/actions';
+import UserService from "../../services/userService";
 
 const Footer = props => {
+  const dispatch = useDispatch();
+  
   const [inputValue, setInputValue] = useState('');
   const [inputEnable, setInputEnable] = useState(true);
   const [userButtonText, setUserButtonText] = useState('Confirmar');
   const [textAreaValue, setTextAreaValue] = useState('');
   const [messageEnable, setMessageEnable] = useState(false);
+
+  const userService = new UserService(dispatch);
 
   const inputChangedHandler = event => {
     setInputValue(event.target.value);
@@ -24,14 +28,17 @@ const Footer = props => {
       setInputEnable(false);
       setMessageEnable(true);
       setUserButtonText('Cancelar');
-      props.onAddUser(inputValue);
+
+      userService.add(inputValue);
+
     } else {
       setInputEnable(true);
       setMessageEnable(false);
       setInputValue('');
       setTextAreaValue('');
       setUserButtonText('Confirmar');
-      props.onRemoveUser(inputValue);
+
+      userService.remove(inputValue);
     }
   };
 
@@ -60,20 +67,4 @@ const Footer = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    onlineUsers: state.users.onlineUsers,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onAddUser: userName => dispatch(actions.addUser(userName)),
-    onRemoveUser: userName => dispatch(actions.removeUser(userName)),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Footer);
+export default Footer;
