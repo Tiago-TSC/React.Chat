@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
+
 import { FooterDiv, UserDiv, Input, MessageDiv, TextArea } from './styles';
-import UserService from "../../../../services/UserService";
-import Button from "../../../../components/Button";
+import UserService from '../../../../services/UserService';
+import Button from '../../../../components/Button';
 
 const Footer = props => {
   const dispatch = useDispatch();
-  
+
   const [inputValue, setInputValue] = useState('');
   const [inputEnable, setInputEnable] = useState(true);
   const [userButtonText, setUserButtonText] = useState('Confirmar');
@@ -31,7 +32,6 @@ const Footer = props => {
       setUserButtonText('Cancelar');
 
       userService.add(inputValue);
-
     } else {
       setInputEnable(true);
       setMessageEnable(false);

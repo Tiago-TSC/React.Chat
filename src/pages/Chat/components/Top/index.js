@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyledDiv, Title } from './styles'
 
-const footer = props => {
+import { StyledDiv, Title } from './styles';
+
+const Top = () => {
   return (
     <StyledDiv>
       <Title>Chat Online</Title>
@@ -9,4 +10,4 @@ const footer = props => {
   );
 };
 
-export default footer;
+export default Top;

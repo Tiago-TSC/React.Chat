@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
+
 import { ListDiv, UserGroup, UserItem } from './styles';
 
-const UserList = props => {
-  const onlineUsers = useSelector(({users}) => users.onlineUsers)
+const UserList = () => {
+  const onlineUsers = useSelector(({ users }) => users.onlineUsers);
 
   const userItems = onlineUsers.map(userName => {
     return <UserItem>{userName}</UserItem>;
