@@ -1,1 +1,3 @@
-export { addUser, removeUser } from './usersActions';
+export { add, remove } from './usersActions';
+
+export { send } from './messagesActions';

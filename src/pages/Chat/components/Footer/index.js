@@ -2,19 +2,22 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { FooterDiv, UserDiv, Input, MessageDiv, TextArea } from './styles';
-import UserService from '../../../../services/UserService';
+import UsersService from '../../../../services/UsersService';
+import MessagesService from '../../../../services/MessagesService';
 import Button from '../../../../components/Button';
 
 const Footer = props => {
   const dispatch = useDispatch();
 
+  const [userName, setUserName] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [inputEnable, setInputEnable] = useState(true);
   const [userButtonText, setUserButtonText] = useState('Confirmar');
   const [textAreaValue, setTextAreaValue] = useState('');
   const [messageEnable, setMessageEnable] = useState(false);
 
-  const userService = new UserService(dispatch);
+  const usersService = new UsersService(dispatch);
+  const messagesService = new MessagesService(dispatch);
 
   const inputChangedHandler = event => {
     setInputValue(event.target.value);
@@ -30,21 +33,28 @@ const Footer = props => {
       setInputEnable(false);
       setMessageEnable(true);
       setUserButtonText('Cancelar');
+      setUserName(inputValue);
 
-      userService.add(inputValue);
+      usersService.add(inputValue);
     } else {
       setInputEnable(true);
       setMessageEnable(false);
       setInputValue('');
       setTextAreaValue('');
       setUserButtonText('Confirmar');
+      setUserName('');
 
-      userService.remove(inputValue);
+      usersService.remove(inputValue);
     }
   };
 
   const textAreaChangedHandler = event => {
     setTextAreaValue(event.target.value);
+  };
+
+  const sendMessage = () => {
+    messagesService.send(userName, textAreaValue);
+    setTextAreaValue('');
   };
 
   return (
@@ -62,7 +72,9 @@ const Footer = props => {
         <TextArea value={textAreaValue} onChange={textAreaChangedHandler} disabled={!messageEnable}>
           {props.message}
         </TextArea>
-        <Button disabled={!messageEnable}>Enviar</Button>
+        <Button onClick={sendMessage} disabled={!messageEnable}>
+          Enviar
+        </Button>
       </MessageDiv>
     </FooterDiv>
   );

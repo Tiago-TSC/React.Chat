@@ -8,6 +8,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import usersReducer from './store/reducers/usersReducer';
+import messagesReducer from './store/reducers/messagesReducer';
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
@@ -16,6 +17,7 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   users: usersReducer,
+  messages: messagesReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

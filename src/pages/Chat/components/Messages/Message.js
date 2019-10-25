@@ -6,14 +6,8 @@ import MessageHeader from './MessageHeader';
 const Message = props => {
   return (
     <MessageContainer>
-      <MessageHeader userName={props.userName} />
-      <Text>
-        texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-        texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-        texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-        texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-        texto texto texto texto{' '}
-      </Text>
+      <MessageHeader userName={props.userName} dateTime={props.dateTime} />
+      <Text>{props.text}</Text>
     </MessageContainer>
   );
 };

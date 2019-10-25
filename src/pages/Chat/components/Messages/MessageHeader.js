@@ -6,7 +6,7 @@ const MessageHeader = props => {
   return (
     <MessageHeaderContainer>
       <UserName>{props.userName}</UserName>
-      <DateTime> - 25/09/2019 15:00:00</DateTime>
+      <DateTime> - {props.dateTime}</DateTime>
     </MessageHeaderContainer>
   );
 };
