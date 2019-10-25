@@ -13,4 +13,5 @@ export const Content = styled.div`
   flex-direction: row;
   flex: 1;
   background-color: #fff;
+  overflow: auto;
 `;
