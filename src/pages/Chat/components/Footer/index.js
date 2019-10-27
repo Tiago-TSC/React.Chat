@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { FooterDiv, UserDiv, Input, MessageDiv, TextArea } from './styles';
@@ -16,8 +16,14 @@ const Footer = props => {
   const [textAreaValue, setTextAreaValue] = useState('');
   const [messageEnable, setMessageEnable] = useState(false);
 
+  const textAreaRef = useRef(null);
+
   const usersService = new UsersService(dispatch);
   const messagesService = new MessagesService(dispatch);
+
+  useEffect(() => {
+    textAreaRef.current.focus();
+  }, [userName]);
 
   const inputKeyPressHandler = event => {
     if (event.key === 'Enter') {
@@ -92,6 +98,7 @@ const Footer = props => {
           onChange={textAreaChangedHandler}
           onKeyPress={event => textAreaKeyPressHandler(event)}
           disabled={!messageEnable}
+          ref={textAreaRef}
         >
           {props.message}
         </TextArea>
