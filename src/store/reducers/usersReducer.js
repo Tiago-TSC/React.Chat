@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../services/objectsService';
 
@@ -7,14 +9,15 @@ const initialState = {
 
 const add = (state, action) => {
   const onlineUsers = [...state.onlineUsers];
-  onlineUsers.push(action.userName);
+  const { userName } = action;
+  onlineUsers.push({ id: `${userName}${moment().format()}`, userName });
 
   return updateObject(state, { onlineUsers });
 };
 
 const remove = (state, action) => {
   const onlineUsers = state.onlineUsers.filter(
-    user => user.toLowerCase() !== action.userName.toLowerCase(),
+    user => user.userName.toLowerCase() !== action.userName.toLowerCase(),
   );
 
   return updateObject(state, { onlineUsers });

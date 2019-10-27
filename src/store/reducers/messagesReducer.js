@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../services/objectsService';
 
@@ -8,7 +10,9 @@ const initialState = {
 const send = (state, action) => {
   const messages = [...state.messages];
   const { userName, dateTime, text } = action;
-  messages.push({ userName, dateTime, text });
+  const id = `${userName}${moment().format()}`;
+
+  messages.push({ id, userName, dateTime, text });
 
   return updateObject(state, { messages });
 };

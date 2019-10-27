@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import * as actions from '../store/actions';
 
 class MessagesService {
@@ -6,7 +8,7 @@ class MessagesService {
   }
 
   send(userName, text) {
-    const dateTime = new Date().toString();
+    const dateTime = moment().format('DD/MM/YYYY HH:mm');
     this.dispatch(actions.send(userName, dateTime, text));
   }
 }

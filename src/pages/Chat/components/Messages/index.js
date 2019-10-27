@@ -10,8 +10,8 @@ const Messages = () => {
   return (
     <MessageGroup>
       {messages.map(message => {
-        const { userName, dateTime, text } = message;
-        return <Message key={dateTime} userName={userName} dateTime={dateTime} text={text} />;
+        const { id, userName, dateTime, text } = message;
+        return <Message key={id} userName={userName} dateTime={dateTime} text={text} />;
       })}
     </MessageGroup>
   );
