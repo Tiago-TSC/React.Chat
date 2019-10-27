@@ -19,6 +19,12 @@ const Footer = props => {
   const usersService = new UsersService(dispatch);
   const messagesService = new MessagesService(dispatch);
 
+  const inputKeyPressHandler = event => {
+    if (event.key === 'Enter') {
+      userNameHandler();
+    }
+  };
+
   const inputChangedHandler = event => {
     setInputValue(event.target.value);
   };
@@ -53,8 +59,19 @@ const Footer = props => {
   };
 
   const sendMessage = () => {
-    messagesService.send(userName, textAreaValue);
-    setTextAreaValue('');
+    if (textAreaValue !== '') {
+      messagesService.send(userName, textAreaValue);
+      setTextAreaValue('');
+    }
+  };
+
+  const textAreaKeyPressHandler = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      sendMessage();
+    }
+
+    event.key = null;
   };
 
   return (
@@ -64,12 +81,18 @@ const Footer = props => {
           placeholder="Nome do usuário"
           value={inputValue}
           onChange={event => inputChangedHandler(event)}
+          onKeyPress={event => inputKeyPressHandler(event)}
           disabled={!inputEnable}
         />
         <Button onClick={userNameHandler}>{userButtonText}</Button>
       </UserDiv>
       <MessageDiv>
-        <TextArea value={textAreaValue} onChange={textAreaChangedHandler} disabled={!messageEnable}>
+        <TextArea
+          value={textAreaValue}
+          onChange={textAreaChangedHandler}
+          onKeyPress={event => textAreaKeyPressHandler(event)}
+          disabled={!messageEnable}
+        >
           {props.message}
         </TextArea>
         <Button onClick={sendMessage} disabled={!messageEnable}>

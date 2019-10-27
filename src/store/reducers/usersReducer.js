@@ -10,7 +10,7 @@ const initialState = {
 const add = (state, action) => {
   const onlineUsers = [...state.onlineUsers];
   const { userName } = action;
-  onlineUsers.push({ id: `${userName}${moment().format()}`, userName });
+  onlineUsers.push({ id: `${userName}${moment().valueOf()}`, userName });
 
   return updateObject(state, { onlineUsers });
 };

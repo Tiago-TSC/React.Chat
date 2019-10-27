@@ -10,7 +10,7 @@ const initialState = {
 const send = (state, action) => {
   const messages = [...state.messages];
   const { userName, dateTime, text } = action;
-  const id = `${userName}${moment().format()}`;
+  const id = `${userName}${moment().valueOf()}`;
 
   messages.push({ id, userName, dateTime, text });
 
