@@ -5,6 +5,7 @@ import { FooterDiv, UserDiv, Input, MessageDiv, TextArea } from './styles';
 import UsersService from '../../../../services/UsersService';
 import MessagesService from '../../../../services/MessagesService';
 import Button from '../../../../components/Button';
+import Modal from '../../../../components/Modal';
 
 const Footer = props => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Footer = props => {
   const [userButtonText, setUserButtonText] = useState('Confirmar');
   const [textAreaValue, setTextAreaValue] = useState('');
   const [messageEnable, setMessageEnable] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const textAreaRef = useRef(null);
 
@@ -23,7 +25,7 @@ const Footer = props => {
 
   useEffect(() => {
     textAreaRef.current.focus();
-  }, [userName]);
+  }, [userName, textAreaValue]);
 
   const inputKeyPressHandler = event => {
     if (event.key === 'Enter') {
@@ -37,7 +39,7 @@ const Footer = props => {
 
   const userNameHandler = () => {
     if (inputValue === '') {
-      alert('Digite o nome do usuário.');
+      setModalIsOpen(true);
       return;
     }
 
@@ -80,8 +82,15 @@ const Footer = props => {
     event.key = null;
   };
 
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <FooterDiv>
+      <Modal show={modalIsOpen} closed={closeModal}>
+        Digite o nome do usuário.
+      </Modal>
       <UserDiv>
         <Input
           placeholder="Nome do usuário"

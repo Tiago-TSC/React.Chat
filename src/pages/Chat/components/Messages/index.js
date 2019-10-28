@@ -11,7 +11,7 @@ const Messages = () => {
 
   useEffect(() => {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-  });
+  }, [messages]);
 
   return (
     <MessageGroup>
