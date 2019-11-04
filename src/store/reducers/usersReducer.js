@@ -1,34 +1,21 @@
 import moment from 'moment';
 
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../../services/objectsService';
+import { updateObject } from '../../helpers/objectHelper';
 
 const initialState = {
   onlineUsers: [],
 };
 
-const add = (state, action) => {
-  const onlineUsers = [...state.onlineUsers];
-  const { userName } = action;
-  onlineUsers.push({ id: `${userName}${moment().valueOf()}`, userName });
-
-  return updateObject(state, { onlineUsers });
-};
-
-const remove = (state, action) => {
-  const onlineUsers = state.onlineUsers.filter(
-    user => user.userName.toLowerCase() !== action.userName.toLowerCase(),
-  );
-
+const update = (state, action) => {
+  const onlineUsers = action.onlineUsers;
   return updateObject(state, { onlineUsers });
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_USER:
-      return add(state, action);
-    case actionTypes.REMOVE_USER:
-      return remove(state, action);
+    case actionTypes.UPDATE_USER_LIST:
+      return update(state, action);
     default:
       return state;
   }

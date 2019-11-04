@@ -38,7 +38,7 @@ export const Container = styled.div`
     }
     50% {
       opacity: 0.8;
-      transform: translateY(60%);
+      transform: translateY(-60%);
     }
     100% {
       opacity: 0;

@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../../services/objectsService';
+import { updateObject } from '../../helpers/objectHelper';
 
 const initialState = {
   messages: [],
