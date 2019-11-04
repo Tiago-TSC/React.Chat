@@ -1,6 +1,9 @@
-import { socket } from '../../src';
+import io from 'socket.io-client';
+
 import * as actions from '../store/actions';
 import * as actionTypes from '../store/actions/actionTypes';
+
+export const socket = io('http://127.0.0.1:7777');
 
 const socketMiddleware = () => {
   return ({ dispatch }) => next => action => {

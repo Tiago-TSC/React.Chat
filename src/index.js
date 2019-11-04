@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import io from 'socket.io-client';
 
 import './index.css';
 import App from './App';
@@ -21,8 +20,6 @@ const rootReducer = combineReducers({
   users: usersReducer,
   messages: messagesReducer,
 });
-
-export const socket = io('http://127.0.0.1:7777');
 
 const store = createStore(
   rootReducer,
