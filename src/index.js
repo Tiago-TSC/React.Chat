@@ -21,10 +21,7 @@ const rootReducer = combineReducers({
   messages: messagesReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk, socketMiddleware())),
-);
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, socketMiddleware)));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -3,6 +3,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 
 const { addUser, removeUser } = require('./userServer');
+const { receiveMessage } = require('./messagesServer');
 
 const port = process.env.PORT || 7777;
 const routes = require('./routes');
@@ -27,8 +28,12 @@ io.on('connection', socket => {
     onlineUsers = removeUser(io, onlineUsers, payload.userName);
   });
 
+  socket.on('SEND_MESSAGE', payload => {
+    receiveMessage(io, payload);
+  });
+
   socket.on('disconnect', () => {
-    console.log('Cliente desconectado');
+    console.log('Cliente desconectado.');
   });
 });
 

@@ -7,9 +7,9 @@ const initialState = {
   messages: [],
 };
 
-const send = (state, action) => {
+const receive = (state, action) => {
   const messages = [...state.messages];
-  const { userName, dateTime, text } = action;
+  const { userName, dateTime, text } = action.message;
   const id = `${userName}${moment().valueOf()}`;
 
   messages.push({ id, userName, dateTime, text });
@@ -19,8 +19,8 @@ const send = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SEND_MESSAGE:
-      return send(state, action);
+    case actionTypes.RECEIVE_MESSAGE:
+      return receive(state, action);
     default:
       return state;
   }

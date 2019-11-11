@@ -1,3 +1,3 @@
 export { add, remove, update } from './usersActions';
 
-export { send } from './messagesActions';
+export { send, receive } from './messagesActions';

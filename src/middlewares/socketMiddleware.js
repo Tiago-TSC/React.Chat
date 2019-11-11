@@ -5,8 +5,16 @@ import * as actionTypes from '../store/actions/actionTypes';
 
 export const socket = io('http://127.0.0.1:7777');
 
-const socketMiddleware = () => {
-  return ({ dispatch }) => next => action => {
+const socketMiddleware = store => {
+  socket.on(actionTypes.UPDATE_USER_LIST, onlineUsers => {
+    store.dispatch(actions.update(onlineUsers));
+  });
+
+  socket.on(actionTypes.RECEIVE_MESSAGE, message => {
+    store.dispatch(actions.receive(message));
+  });
+
+  return next => action => {
     if (typeof action === 'function') {
       return next(action);
     }
@@ -23,16 +31,13 @@ const socketMiddleware = () => {
 
     if (emit) {
       socket.emit(event, payload);
+      return;
     }
 
     let handleEvent = handle;
     if (typeof handleEvent === 'string') {
-      handleEvent = result => dispatch({ type: handle, result, ...rest });
+      handleEvent = result => store.dispatch({ type: handle, result, ...rest });
     }
-
-    socket.on(actionTypes.UPDATE_USER_LIST, onlineUsers => {
-      dispatch(actions.update(onlineUsers));
-    });
 
     return socket.on(event, handleEvent);
   };
