@@ -1,21 +1,22 @@
 const moment = require('moment');
 
 module.exports = {
-  addUser(io, onlineUsers, userName) {
-    onlineUsers.push({
-      id: `${userName}${moment().valueOf()}`,
+  addUser(io, socket, onlineUsers, userName, id) {
+    const user = {
+      id,
       userName,
-    });
+    };
 
+    onlineUsers.push(user);
+
+    socket.emit('CONNECTED_USER', user);
     io.emit('UPDATE_USER_LIST', onlineUsers);
 
     return onlineUsers;
   },
 
-  removeUser(io, onlineUsers, userName) {
-    const newList = onlineUsers.filter(
-      user => user.userName.toLowerCase() !== userName.toLowerCase(),
-    );
+  removeUser(io, onlineUsers, id) {
+    const newList = onlineUsers.filter(user => user.id !== id);
 
     onlineUsers = newList;
 

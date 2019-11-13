@@ -3,9 +3,13 @@ import io from 'socket.io-client';
 import * as actions from '../store/actions';
 import * as actionTypes from '../store/actions/actionTypes';
 
-export const socket = io('http://127.0.0.1:7777');
+export const socket = io('http://localhost:7777');
 
 const socketMiddleware = store => {
+  socket.on(actionTypes.CONNECTED_USER, user => {
+    store.dispatch(actions.setConnected(user));
+  });
+
   socket.on(actionTypes.UPDATE_USER_LIST, onlineUsers => {
     store.dispatch(actions.update(onlineUsers));
   });

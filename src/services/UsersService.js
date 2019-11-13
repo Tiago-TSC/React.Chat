@@ -9,8 +9,8 @@ class UsersService {
     this.dispatch(actions.add(userName));
   }
 
-  remove(userName) {
-    this.dispatch(actions.remove(userName));
+  remove(id) {
+    this.dispatch(actions.remove(id));
   }
 }
 

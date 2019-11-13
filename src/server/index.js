@@ -21,11 +21,11 @@ io.on('connection', socket => {
   console.log('Novo cliente conectado.');
 
   socket.on('ADD_USER', payload => {
-    onlineUsers = addUser(io, onlineUsers, payload.userName);
+    onlineUsers = addUser(io, socket, onlineUsers, payload.userName, socket.id);
   });
 
   socket.on('REMOVE_USER', payload => {
-    onlineUsers = removeUser(io, onlineUsers, payload.userName);
+    onlineUsers = removeUser(io, onlineUsers, payload.id);
   });
 
   socket.on('SEND_MESSAGE', payload => {
@@ -33,6 +33,7 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
+    onlineUsers = removeUser(io, onlineUsers, socket.id);
     console.log('Cliente desconectado.');
   });
 });

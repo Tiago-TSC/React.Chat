@@ -11,15 +11,22 @@ export const add = userName => {
     });
 };
 
-export const remove = userName => {
+export const remove = id => {
   return dispatch =>
     dispatch({
       event: actionTypes.REMOVE_USER,
       emit: true,
       payload: {
-        userName,
+        id,
       },
     });
+};
+
+export const setConnected = user => {
+  return {
+    type: actionTypes.CONNECTED_USER,
+    user,
+  };
 };
 
 export const update = onlineUsers => {

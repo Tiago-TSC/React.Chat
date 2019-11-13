@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FooterDiv, UserDiv, Input, MessageDiv, TextArea } from './styles';
 import UsersService from '../../../../services/UsersService';
@@ -9,6 +9,8 @@ import Modal from '../../../../components/Modal';
 
 const Footer = props => {
   const dispatch = useDispatch();
+
+  const connectedUser = useSelector(({ users }) => users.connectedUser);
 
   const [userName, setUserName] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -58,7 +60,7 @@ const Footer = props => {
       setUserButtonText('Confirmar');
       setUserName('');
 
-      usersService.remove(inputValue);
+      usersService.remove(connectedUser.id);
     }
   };
 
