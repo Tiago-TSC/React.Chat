@@ -16,11 +16,15 @@ module.exports = {
   },
 
   removeUser(io, onlineUsers, id) {
+    const total = onlineUsers.length;
+
     const newList = onlineUsers.filter(user => user.id !== id);
 
-    onlineUsers = newList;
+    if (total != newList.length) {
+      onlineUsers = newList;
 
-    io.emit('UPDATE_USER_LIST', onlineUsers);
+      io.emit('UPDATE_USER_LIST', onlineUsers);
+    }
 
     return onlineUsers;
   },

@@ -60,7 +60,9 @@ const Footer = props => {
       setUserButtonText('Confirmar');
       setUserName('');
 
-      usersService.remove(connectedUser.id);
+      if (connectedUser) {
+        usersService.remove(connectedUser.id);
+      }
     }
   };
 
