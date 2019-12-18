@@ -14,8 +14,14 @@ export const send = (userName, dateTime, text) => {
 };
 
 export const receive = message => {
-  return {
-    type: actionTypes.RECEIVE_MESSAGE,
-    message,
+  return (dispatch, getEvent) => {
+    const connectedUser = getEvent().users.connectedUser;
+
+    if (connectedUser) {
+      dispatch({
+        type: actionTypes.RECEIVE_MESSAGE,
+        message,
+      });
+    }
   };
 };

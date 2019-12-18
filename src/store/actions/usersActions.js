@@ -12,7 +12,7 @@ export const add = userName => {
 };
 
 export const remove = id => {
-  return dispatch =>
+  return dispatch => {
     dispatch({
       event: actionTypes.REMOVE_USER,
       emit: true,
@@ -20,6 +20,11 @@ export const remove = id => {
         id,
       },
     });
+    dispatch({
+      type: actionTypes.CONNECTED_USER,
+      user: null,
+    });
+  };
 };
 
 export const setConnected = user => {
