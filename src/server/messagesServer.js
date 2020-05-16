@@ -1,5 +1,8 @@
+const socket = require('./socket');
+const io = socket.getIo();
+
 module.exports = {
-  receiveMessage(io, message) {
+  receiveMessage(message) {
     io.emit('RECEIVE_MESSAGE', message);
   },
 };

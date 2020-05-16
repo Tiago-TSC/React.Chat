@@ -1,7 +1,10 @@
 const moment = require('moment');
 
+const socket = require('./socket');
+const io = socket.getIo();
+
 module.exports = {
-  addUser(io, socket, onlineUsers, userName, id) {
+  addUser(socket, onlineUsers, userName, id) {
     const user = {
       id,
       userName,
@@ -15,7 +18,7 @@ module.exports = {
     return onlineUsers;
   },
 
-  removeUser(io, onlineUsers, id) {
+  removeUser(onlineUsers, id) {
     const total = onlineUsers.length;
 
     const newList = onlineUsers.filter(user => user.id !== id);
